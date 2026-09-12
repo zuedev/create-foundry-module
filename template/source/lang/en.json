@@ -1,0 +1,5 @@
+{
+  "{{MODULE_ID}}.ready": "{{MODULE_TITLE}} is ready!",
+  "{{MODULE_ID}}.settings.example.name": "Example Setting",
+  "{{MODULE_ID}}.settings.example.hint": "Toggle an example world-scoped setting."
+}

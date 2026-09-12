@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stamp version into manifest
+        id: meta
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          URL="https://github.com/${GITHUB_REPOSITORY}"
+          jq --arg v "$VERSION" --arg u "$URL" '
+            .version = $v
+            | .manifest = ($u + "/releases/latest/download/module.json")
+            | .download = ($u + "/releases/download/v" + $v + "/module.zip")
+          ' source/module.json > tmp.json && mv tmp.json source/module.json
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Package
+        run: cd source && zip -r ../module.zip .
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ steps.meta.outputs.version }}
+          generate_release_notes: true
+          files: |
+            module.zip
+            source/module.json

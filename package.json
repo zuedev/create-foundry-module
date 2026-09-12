@@ -1,0 +1,12 @@
+{
+  "name": "@zuedev/create-foundry-module",
+  "version": "0.1.0",
+  "description": "Scaffold a zero-build Foundry VTT module with a Dockerised dev server and release workflow.",
+  "type": "module",
+  "bin": { "create-foundry-module": "./index.js" },
+  "files": ["index.js", "template"],
+  "engines": { "node": ">=18" },
+  "license": "MIT",
+  "repository": "github:zuedev/create-foundry-module",
+  "keywords": ["foundry-vtt", "foundryvtt", "create", "scaffold"]
+}

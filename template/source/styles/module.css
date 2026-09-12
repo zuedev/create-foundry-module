@@ -1,0 +1,3 @@
+.{{MODULE_ID}} {
+  /* scope styles under a module class to avoid collisions */
+}

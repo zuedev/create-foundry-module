@@ -1,0 +1,15 @@
+services:
+  foundry:
+    image: felddy/foundryvtt:${FOUNDRY_VERSION:-release}
+    hostname: foundry-dev
+    ports:
+      - "30000:30000"
+    environment:
+      FOUNDRY_USERNAME: ${FOUNDRY_USERNAME}
+      FOUNDRY_PASSWORD: ${FOUNDRY_PASSWORD}
+      FOUNDRY_ADMIN_KEY: ${FOUNDRY_ADMIN_KEY:-admin}
+      FOUNDRY_HOT_RELOAD: "true"
+    volumes:
+      - ./foundry-data:/data
+      - ./source:/data/Data/modules/${MODULE_ID:-{{MODULE_ID}}}
+    restart: unless-stopped
